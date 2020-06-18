@@ -26,7 +26,7 @@ module AutoHtml
     private
 
     def vimeo_pattern
-      @vimeo_pattern ||= %r{(?<!href=["'])https?://(www.)?vimeo\.com/([A-Za-z0-9._%-]*)((\?|#)\S+)?}
+      @vimeo_pattern ||= %r{(?<!href=["'])https?://(www.)?vimeo\.com/([A-Za-z0-9._%-]*)((\?|#)[^\s<]+)?}
     end
 
     def src_url(vimeo_id)
@@ -39,7 +39,7 @@ module AutoHtml
         attrs[:width] = @width
         attrs[:height] = @height
         attrs[:frameborder] = 0
-        attrs.merge!(fullscreen_attributes) if @allow_fullscreen    
+        attrs[:allowfullscreen] = @allow_fullscreen
         if @lazy
           attrs['data-src'] = src
           attrs[:class] = 'lazyload'
@@ -49,12 +49,5 @@ module AutoHtml
       end
     end
 
-    def fullscreen_attributes
-      {
-        webkitallowfullscreen: 'yes',
-        mozallowfullscreen: 'yes',
-        allowfullscreen: 'yes'
-      }
-    end
   end
 end

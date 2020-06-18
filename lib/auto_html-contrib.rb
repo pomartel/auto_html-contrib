@@ -7,4 +7,5 @@ module AutoHtml
   autoload :YouTube,          'auto_html/youtube'
   autoload :YouTubeThumbnail, 'auto_html/youtube_thumbnail'
   autoload :Twitter,          'auto_html/twitter'
+  autoload :Facebook,         'auto_html/facebook'
 end

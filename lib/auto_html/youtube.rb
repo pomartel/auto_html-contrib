@@ -50,7 +50,6 @@ module AutoHtml
       attrs = {
         width: @width,
         height: @height,
-        'data-src': src,
         frameborder: 0,
         allowfullscreen: 'yes'
       }

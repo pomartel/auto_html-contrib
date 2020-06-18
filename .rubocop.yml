@@ -1,8 +1,0 @@
-Metrics/MethodLength:
-  Enabled: false
-
-Metrics/LineLength:
-  Enabled: false
-
-Style/FileName:
-  Enabled: false
