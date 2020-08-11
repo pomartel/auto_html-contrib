@@ -8,4 +8,5 @@ module AutoHtml
   autoload :YouTubeThumbnail, 'auto_html/youtube_thumbnail'
   autoload :Twitter,          'auto_html/twitter'
   autoload :Facebook,         'auto_html/facebook'
+  autoload :Soundcloud,       'auto_html/soundcloud'
 end
