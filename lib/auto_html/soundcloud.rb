@@ -11,10 +11,12 @@ module AutoHtml
     end
 
     def call(text)
-      text.gsub(/(https?:\/\/)?(www.)?soundcloud\.com\/\S*/) do |match|
-        new_uri = match.to_s
-        new_uri = (new_uri =~ /^https?\:\/\/.*/) ? new_uri : "https://#{new_uri}"
-        tag(:iframe, iframe_attributes(new_uri)) { '' }
+      text.gsub(%r{(?<!href=["'])https?://(www.)?soundcloud\.com/([A-Za-z0-9._%-/]*)((\?|#)[^\s<]+)?}) do |match|
+        path = Regexp.last_match(2)
+        new_uri = "https://soundcloud.com/#{path}"
+        tag = tag(:iframe, iframe_attributes(new_uri)) { '' }
+        puts tag
+        tag
       end
     end
 
