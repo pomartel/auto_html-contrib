@@ -13,8 +13,7 @@ module AutoHtml
     def call(text)
       text.gsub(/(https:\/\/)?(www.)?soundcloud\.com\/\S*/) do |match|
         new_uri = match.to_s
-        new_uri = (new_uri =~ /^https\:\/\/.*/) ? URI(new_uri) : URI("https://#{new_uri}")
-        new_uri.normalize!
+        new_uri = (new_uri =~ /^https\:\/\/.*/) ? new_uri : "https://#{new_uri}"
         tag(:iframe, iframe_attributes(new_uri)) { '' }
       end
     end
