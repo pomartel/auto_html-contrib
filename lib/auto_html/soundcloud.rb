@@ -4,10 +4,10 @@ module AutoHtml
   class Soundcloud
     include TagHelper
 
-    def initialize(width: '100%', height: 166, lazy: false)
+    def initialize(width: '100%', height: 166, loading: 'auto')
       @width = width
       @height = height
-      @lazy = lazy
+      @loading = loading
     end
 
     def call(text)
@@ -27,19 +27,13 @@ module AutoHtml
     end
 
     def iframe_attributes(new_uri)
-      src = src_url(new_uri)
-
       {}.tap do |attrs|
         attrs[:width] = @width
         attrs[:heigth] = @height
         attrs[:scrolling] = 'no'
         attrs[:frameborder] = 'no'
-        if @lazy
-          attrs['data-src'] = src
-          attrs[:class] = 'lazyload'
-        else
-          attrs[:src] = src
-        end
+        attrs[:src] = src_url(new_uri)
+        attrs[:loading] = @loading
       end
     end
 

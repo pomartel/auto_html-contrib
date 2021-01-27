@@ -5,11 +5,11 @@ module AutoHtml
   class Vimeo
     include TagHelper
 
-    def initialize(width: 420, height: 315, allow_fullscreen: true, lazy: false)
+    def initialize(width: 420, height: 315, allow_fullscreen: true, loading: 'auto')
       @width = width
       @height = height
       @allow_fullscreen = allow_fullscreen
-      @lazy = lazy
+      @loading = loading
     end
 
     def call(text)
@@ -34,18 +34,13 @@ module AutoHtml
     end
 
     def iframe_attributes(vimeo_id)
-      src = src_url(vimeo_id)
       {}.tap do |attrs|
         attrs[:width] = @width
         attrs[:height] = @height
         attrs[:frameborder] = 0
         attrs[:allowfullscreen] = @allow_fullscreen
-        if @lazy
-          attrs['data-src'] = src
-          attrs[:class] = 'lazyload'
-        else
-          attrs[:src] = src
-        end
+        attrs[:src] = src_url(vimeo_id)
+        attrs[:loading] = @loading
       end
     end
 

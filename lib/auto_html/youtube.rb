@@ -5,10 +5,10 @@ module AutoHtml
   class YouTube
     include TagHelper
 
-    def initialize(width: 420, height: 315, lazy: false)
+    def initialize(width: 420, height: 315, loading: 'auto')
       @width = width
       @height = height
-      @lazy = lazy
+      @loading = loading
     end
 
     def call(text)
@@ -46,20 +46,14 @@ module AutoHtml
     end
 
     def iframe_attributes(youtube_id)
-      src = "//www.youtube.com/embed/#{youtube_id}"
-      attrs = {
+      {
+        src: "//www.youtube.com/embed/#{youtube_id}",
         width: @width,
         height: @height,
         frameborder: 0,
-        allowfullscreen: 'yes'
+        allowfullscreen: 'yes',
+        loading: @loading
       }
-      if @lazy
-        attrs['data-src'] = src
-        attrs[:class] = 'lazyload'
-      else
-        attrs[:src] = src
-      end
-      attrs
     end
   end
 end
